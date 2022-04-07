@@ -31,8 +31,8 @@ function buildGauge(wfreq) {
     }];
 
     var layout = {
-        width: 600,
-        height: 450,
+        width: 550,
+        height: 400,
         margin: {
             t: 0,
             b: 0
