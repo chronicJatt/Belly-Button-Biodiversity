@@ -18,6 +18,10 @@ function buildPlots(selection) {
             // Double equals because selection is string but id is integer
             return selection == subject.id
         });
+
+        // Call buildGauge function with wfreq data
+        buildGauge(filteredMetadata[0].wfreq);
+
         // Populate demographics table with subject metadata
         var demoBox = d3.select('#sample-metadata');
         demoBox.html('');
@@ -30,6 +34,7 @@ function buildPlots(selection) {
         var filteredSamples = samples.filter(subject => {
             return selection == subject.id
         });
+
         // Populate Horizontal Bar Chart with filtered sample data
         var barChart = d3.select('#bar');
         barChart.html('');
