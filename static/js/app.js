@@ -34,19 +34,34 @@ function buildPlots(selection) {
         var barChart = d3.select('#bar');
         barChart.html('');
         // Slice top 10 
-        var sampleValues = filteredSamples[0].sample_values.slice(0,10).reverse();
-        var otuIDs = filteredSamples[0].otu_ids.slice(0,10).reverse();
-        var otuLabels = filteredSamples[0].otu_labels.slice(0,10).reverse();
-        var data = [{
+        var sampleValues = filteredSamples[0].sample_values;
+        var otuIDs = filteredSamples[0].otu_ids;
+        var otuLabels = filteredSamples[0].otu_labels;
+        var hbData = [{
             type: 'bar',
-            x: sampleValues,
-            y: otuIDs.map(otu => 'OTU' + ' ' + otu),
-            text: otuLabels,
+            x: sampleValues.slice(0,10).reverse(),
+            y: otuIDs.map(otu => 'OTU' + ' ' + otu).slice(0,10).reverse(),
+            text: otuLabels.slice(0,10).reverse(),
             orientation: 'h'
         }];
-        Plotly.newPlot('bar', data);
+        Plotly.newPlot('bar', hbData);
         
-        // 
+        // Bubble Chart
+        var bubbleChart = d3.select('#bubble');
+        bubbleChart.html('');
+        var trace1 = {
+            x: otuIDs,
+            y: sampleValues,
+            text: otuLabels,
+            mode: 'markers',
+            marker: {
+                color: otuIDs,
+                size: sampleValues,
+                colorscale: 'Earth'
+            }
+        };
+        var bbData = [trace1];
+        Plotly.newPlot('bubble', bbData);
     });
 }
 
